@@ -8,6 +8,8 @@ import os
 
 from flask import Flask, session, request, jsonify, render_template, redirect, url_for
 
+app = Flask(__name__)
+
 NEXMO_APPLICATION_ID = os.environ['NEXMO_APPLICATION_ID']
 NEXMO_PRIVATE_KEY = os.environ['NEXMO_PRIVATE_KEY']
 TEST_PHONE = os.environ['TEST_PHONE']
