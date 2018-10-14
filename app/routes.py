@@ -64,6 +64,8 @@ def calls():
 
     return jsonify(response)
 
+compliment1 = "<speak><break strength='weak' />There may not be many pandas left , but at least <prosody rate='slow'>we still have you.</prosody></speak>"
+
 @app.route('/answer', methods=['GET', 'POST'])
 def answer():
     print('HEY HEY HEY you got to the answer endpoint!')
@@ -71,7 +73,8 @@ def answer():
     ncco = [
                 {
                     "action": "talk",
-                    "text": "                                It takes a lot to make a stew"
+                    "voiceName": "Nicole",
+                    "text": compliment1
                 }
             ]
 
