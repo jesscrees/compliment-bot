@@ -60,7 +60,9 @@ def verification_code():
 def calls():
     print('you are at the calls endpoint good job')
     # number_to_call = session.get(phone_number, None)
-    number_to_call = TEST_PHONE
+    # request_id_dict = session.get('request_id_dict', None)
+    number_to_call = request_id_dict[phone_number_param]
+    # number_to_call = TEST_PHONE
     response = client.create_call({
         'to': [{'type': 'phone', 'number': number_to_call}],
         'from': {'type': 'phone', 'number': number_to_call},
