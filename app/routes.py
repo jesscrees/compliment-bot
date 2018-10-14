@@ -1,4 +1,3 @@
-from app import app
 from app import verify
 
 import nexmo
