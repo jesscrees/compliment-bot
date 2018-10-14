@@ -18,6 +18,10 @@ app.secret_key = os.environ['FLASK_SECRET_KEY']
 
 client = nexmo.Client(application_id=NEXMO_APPLICATION_ID, private_key=NEXMO_PRIVATE_KEY)
 
+@app.route('/health')
+def health_check():
+    return 200
+
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index')
 def index():
