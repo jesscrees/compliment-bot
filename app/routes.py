@@ -5,6 +5,7 @@ import nexmo
 import requests
 import logging
 import os
+import random
 
 from flask import Flask, session, request, jsonify, render_template, redirect, url_for
 
@@ -64,7 +65,13 @@ def calls():
 
     return jsonify(response)
 
-compliment1 = "<speak><break strength='weak' />There may not be many pandas left , but at least <prosody rate='slow'>we still have you.</prosody></speak>"
+compliments = [
+        """<speak><break strength='weak' /> There may not be many pandas left, but at least <prosody rate='slow'>we still have you.</prosody></speak>""",
+        """<speak><break strength='weak'/> <prosody rate='slow'>Roses are red, violets are blue, <break strength='weak'/> you're a wonderful programmer with a fantastic work ethic.</prosody> </speak>""",
+        """<speak><break strength='weak'/> All the long years of human evolution have lead to you, <break strength='weak'/> and we are not disappointed. </speak>""",
+        """<speak><break strength='weak' /> You're a wonderful mum.</speak>""",
+        """<speak><break strength='weak' /> You look good in hats, <break strength='strong'> but you also look good out of hats. </speak>""",
+        ] 
 
 @app.route('/answer', methods=['GET', 'POST'])
 def answer():
@@ -74,7 +81,7 @@ def answer():
                 {
                     "action": "talk",
                     "voiceName": "Nicole",
-                    "text": compliment1
+                    "text": random.choice(compliments)
                 }
             ]
 
