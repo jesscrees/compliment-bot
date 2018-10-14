@@ -8,12 +8,12 @@ import os
 
 from flask import Flask, session, request, jsonify, render_template, redirect, url_for
 
-NEXMO_APPLICATION_ID = os.environ['NEXMO_APPLICATION_ID']
-NEXMO_PRIVATE_KEY = os.environ['NEXMO_PRIVATE_KEY']
-TEST_PHONE = os.environ['TEST_PHONE']
+NEXMO_APPLICATION_ID = os.getenv['NEXMO_APPLICATION_ID']
+NEXMO_PRIVATE_KEY = os.getenv['NEXMO_PRIVATE_KEY']
+TEST_PHONE = os.getenv['TEST_PHONE']
 number_to_call = TEST_PHONE
 
-app.secret_key = os.environ['FLASK_SECRET_KEY']
+app.secret_key = os.getenv['FLASK_SECRET_KEY']
 
 client = nexmo.Client(application_id=NEXMO_APPLICATION_ID, private_key=NEXMO_PRIVATE_KEY)
 
