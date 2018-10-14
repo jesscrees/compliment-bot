@@ -20,7 +20,7 @@ client = nexmo.Client(application_id=NEXMO_APPLICATION_ID, private_key=NEXMO_PRI
 
 @app.route('/')
 def health_check():
-    return 200
+    return "OK"
 
 @app.route('/start', methods=['GET', 'POST'])
 @app.route('/index')
