@@ -43,7 +43,7 @@ def verification_code():
     # Get form response
     code_response = request.json['form_response']['answers'][0]['text']
     phone_number_param = request.json['form_response']['hidden']['phone']
-    
+    session['phone_number'] = phone_number_param
     # Get the request id from the file for this phone number
     request_id_dict = session.get('request_id_dict', None)
     request_id = request_id_dict[phone_number_param]
@@ -59,7 +59,7 @@ def verification_code():
 @app.route('/calls', methods=['GET', 'POST'])
 def calls():
     print('you are at the calls endpoint good job')
-    number_to_call = session.get(phone_number_param, None)
+    number_to_call = session.get(phone_number, None)
     response = client.create_call({
         'to': [{'type': 'phone', 'number': number_to_call}],
         'from': {'type': 'phone', 'number': number_to_call},
