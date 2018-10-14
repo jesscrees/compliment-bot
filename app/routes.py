@@ -12,7 +12,6 @@ app = Flask(__name__)
 NEXMO_APPLICATION_ID = os.environ['NEXMO_APPLICATION_ID']
 NEXMO_PRIVATE_KEY = os.environ['NEXMO_PRIVATE_KEY']
 TEST_PHONE = os.environ['TEST_PHONE']
-number_to_call = TEST_PHONE
 
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 
@@ -44,8 +43,7 @@ def verification_code():
     # Get form response
     code_response = request.json['form_response']['answers'][0]['text']
     phone_number_param = request.json['form_response']['hidden']['phone']
-
-
+    
     # Get the request id from the file for this phone number
     request_id_dict = session.get('request_id_dict', None)
     request_id = request_id_dict[phone_number_param]
@@ -55,12 +53,13 @@ def verification_code():
     if verification_status == "0":
         verify.store_number(phone_number_param)
 
-    return "You're playing telephone"
+    return redirect(url_for('calls'))
 
 
 @app.route('/calls', methods=['GET', 'POST'])
 def calls():
     print('you are at the calls endpoint good job')
+    number_to_call = session.get(phone_number_param, None)
     response = client.create_call({
         'to': [{'type': 'phone', 'number': number_to_call}],
         'from': {'type': 'phone', 'number': number_to_call},
