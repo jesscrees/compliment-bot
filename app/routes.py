@@ -82,3 +82,5 @@ def answer():
 
     return jsonify(ncco)
 
+if __name__ == '__main__':
+    app.run()
